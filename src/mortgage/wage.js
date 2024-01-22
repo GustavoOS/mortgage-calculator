@@ -40,7 +40,7 @@ class FGTS {
     }
 }
 
-class Entrepeneur {
+class Entrepreneur {
     deposit() { }
     withdraw(date, amount) { return 0 }
 }
@@ -64,5 +64,5 @@ module.exports = {
     calculateFGTS,
     FGTS,
     Wallet,
-    Entrepeneur
+    Entrepreneur
 }
