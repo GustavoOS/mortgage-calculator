@@ -21,15 +21,15 @@ class FGTS {
     }
 
     shouldHoldForLiquidation(amount) {
-        return (amount > this.funds) &&
-            amount < this.funds + (24 * this.monthlyPayments)
+        const upperLimit = truncAsMoney(this.funds + (24 * this.monthlyPayments))
+        return (amount > this.funds) && (amount < upperLimit)
     }
 
     withdraw(date, amount) {
         if (this.canWithdraw(date) && !this.shouldHoldForLiquidation(amount)) {
             this.lastWithdrawDate = date
             const decrease = Math.min(this.funds, amount)
-            this.funds -= decrease
+            this.funds = truncAsMoney(this.funds - decrease)
             return decrease
         }
         return 0
@@ -51,11 +51,11 @@ class Wallet {
         this.annualContribution = annualContribution
     }
 
-    withDrawal(date, amount) {
+    withdraw(date, amount) {
         let cash = this.monthlyContribution
         if (date.getMonth() === 11)
             cash += this.annualContribution
-        return Math.min(amount, cash)
+        return truncAsMoney(Math.min(amount, cash))
     }
 }
 

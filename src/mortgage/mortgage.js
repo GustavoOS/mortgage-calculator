@@ -1,6 +1,5 @@
 const { pmt, annualRateToMonthlyRate } = require("./math")
 const { truncAsMoney } = require("./money")
-const { calculateMaxInstallment } = require("./wage")
 
 const calculateInstallment = (balance, monthlyInterestRate, numberOfMonths) =>
     truncAsMoney(pmt(monthlyInterestRate, numberOfMonths, -balance))
@@ -8,68 +7,57 @@ const calculateInstallment = (balance, monthlyInterestRate, numberOfMonths) =>
 const calculateMonthlyInterest = (balance, monthlyInterestRate) =>
     truncAsMoney(balance * monthlyInterestRate)
 
-class BillCalculator {
-    constructor(installment, interestRate, extraExpenses){
-        this.installment = installment
-        this.interestRate = interestRate
+class Bill {
+    constructor(interest, amortization, extraExpenses) {
+        this.interest = interest
+        this.amortization = amortization
+        this.total = interest + amortization + extraExpenses
+    }
+}
+
+class PriceTable {
+    constructor(totalValue, annualInterestRate, numberOfMonths, extraExpenses){
+        this.interestRate = annualRateToMonthlyRate(annualInterestRate)
+        this.installment = calculateInstallment(totalValue, this.interestRate, numberOfMonths)
         this.extraExpenses = extraExpenses
     }
 
     calculate(balance) {
-        let interest, amortization, total
         if(balance > 0) {
-            interest = calculateMonthlyInterest(balance, this.interestRate)
-            amortization = this.installment - interest
-            total = interest + amortization + this.extraExpenses
-        } else {
-            interest = 0
-            amortization = 0
-            total = 0
+            const interest = calculateMonthlyInterest(balance, this.interestRate)
+            return new Bill(
+                interest,
+                truncAsMoney(this.installment - interest),
+                this.extraExpenses
+            )
         }
-        return {interest, amortization, total}
+        return new Bill(0,0, 0)
     }
 }
 
-const calculateMortgage = ({
-    totalValue,
-    fgts,
-    extraExpenses,
-    contribution,
-    numberOfMonths,
-    annualInterestRate,
-    initialDate
-}) => {
-    const monthlyInterestRate = annualRateToMonthlyRate(annualInterestRate)
-    const installment = calculateInstallment(totalValue, monthlyInterestRate, numberOfMonths)
-    let balance = totalValue
-
-    const report = new Array(numberOfMonths)
-    const billCalculator = new BillCalculator(installment, monthlyInterestRate, extraExpenses)
-    for (let i = 0; i < numberOfMonths; i++) {
-        let installmentDate = initialDate
-        installmentDate.setMonth(initialDate.getMonth() + i)
-        fgts.deposit()
-        const fgtsWithdrawal = fgts.withdraw(installmentDate, balance)
-        const cashPayment = contribution.withdraw(installmentDate, balance)
-        const bill = billCalculator.calculate(balance - fgtsWithdrawal - cashPayment)
-        balance -= fgtsWithdrawal + cashPayment + bill.amortization
-        
-
-        report[i] = {
-            installmentDate,
-            fgtsWithdrawal,
-            cashPayment,
-            bill,
-            balance
-        }
-
-        if(balance <= 0) break
+class SacTable {
+    constructor(totalValue, annualInterestRate, numberOfMonths, extraExpenses) {
+        this.interestRate = annualRateToMonthlyRate(annualInterestRate)
+        this.monthlyAmortization = truncAsMoney(totalValue/numberOfMonths)
+        this.extraExpenses = extraExpenses
     }
-    return report.filter(n=>n!==undefined)
+
+    calculate(balance) {
+        if(balance > 0) {
+            return new Bill(
+                calculateMonthlyInterest(balance, this.interestRate),
+                Math.min(this.monthlyAmortization, balance),
+                this.extraExpenses
+            )
+        }
+        return new Bill(0,0,0)
+    }
 }
 
 
 module.exports = {
     calculateInstallment,
-    calculateMonthlyInterest
+    calculateMonthlyInterest,
+    PriceTable,
+    SacTable
 }
