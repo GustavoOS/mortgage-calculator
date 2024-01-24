@@ -1,4 +1,4 @@
-const { truncAsMoney, subtractMoney } = require("../core/money")
+const { truncAsMoney, subtractMoney } = require("../../core/money")
 
 describe("Test money parse", ()=>{
     it("parse a third", () => {

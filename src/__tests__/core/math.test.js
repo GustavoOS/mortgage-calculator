@@ -2,7 +2,7 @@ const {
     pmt,
     annualRateToMonthlyRate,
     parsePercentage
-} = require("../core/math");
+} = require("../../core/math");
 
 
 describe("Test the math", () => {

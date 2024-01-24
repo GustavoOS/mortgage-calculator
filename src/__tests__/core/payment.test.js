@@ -1,6 +1,6 @@
-const { SacTable, PriceTable } = require("../core/mortgage")
-const { Entrepreneur, Wallet, FGTS } = require("../core/wage")
-const { calculatePayments, validateCompatiblePayment } = require("../core/payment")
+const { SacTable, PriceTable } = require("../../core/mortgage")
+const { Entrepreneur, Wallet, FGTS } = require("../../core/wage")
+const { calculatePayments, validateCompatiblePayment } = require("../../core/payment")
 
 describe("Test payment calculations", () => {
     const ent = new Entrepreneur()
