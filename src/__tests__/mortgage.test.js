@@ -1,4 +1,5 @@
-const { calculateInstallment, calculateMonthlyInterest, SacTable, PriceTable } = require("../mortgage/mortgage")
+const { calculateInstallment, calculateMonthlyInterest,
+    SacTable, PriceTable, Bill } = require("../mortgage/mortgage")
 const { annualRateToMonthlyRate } = require("../mortgage/math")
 
 describe("Test mortgage math", () => {
@@ -25,7 +26,7 @@ describe("Test SAC Table in 3 payments", () => {
         expect(result.total).toEqual(410)
     })
 
-    it("Test second payment", ()=>{
+    it("Test second payment", () => {
         const sac = new SacTable(300, 4095, 3, 10)
         const result = sac.calculate(200)
         expect(result.amortization).toEqual(100)
@@ -87,5 +88,24 @@ describe("Test Price Table in 3 payments", () => {
         expect(result.amortization).toEqual(0)
         expect(result.interest).toEqual(0)
         expect(result.total).toEqual(0)
+    })
+})
+
+
+describe("Test Bill", () => {
+    it("Test total value should be a money value", () => {
+        const bill = new Bill(11.32, 1.18, 1 / 3)
+        expect(bill.total).toEqual(12.83)
+    })
+    it("0 amortization interest and expenses equals 0 total", () => {
+        const bill = new Bill(0,0,0)
+        expect(bill.total).toEqual(0)
+    })
+
+    it("Test components", () => {
+        const bill = new Bill(10, 20, 30)
+        expect(bill.interest).toEqual(10)
+        expect(bill.amortization).toEqual(20)
+        expect(bill.total).toEqual(60)
     })
 })

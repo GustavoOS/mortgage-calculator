@@ -11,7 +11,7 @@ class Bill {
     constructor(interest, amortization, extraExpenses) {
         this.interest = interest
         this.amortization = amortization
-        this.total = interest + amortization + extraExpenses
+        this.total = truncAsMoney(interest + amortization + extraExpenses)
     }
 }
 
@@ -59,5 +59,6 @@ module.exports = {
     calculateInstallment,
     calculateMonthlyInterest,
     PriceTable,
-    SacTable
+    SacTable,
+    Bill
 }
