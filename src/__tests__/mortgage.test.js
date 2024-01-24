@@ -1,6 +1,6 @@
 const { calculateInstallment, calculateMonthlyInterest,
-    SacTable, PriceTable, Bill } = require("../mortgage/mortgage")
-const { annualRateToMonthlyRate } = require("../mortgage/math")
+    SacTable, PriceTable, Bill } = require("../core/mortgage")
+const { annualRateToMonthlyRate } = require("../core/math")
 
 describe("Test mortgage math", () => {
     it("Calculate installment", () => {
