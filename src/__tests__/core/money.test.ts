@@ -1,4 +1,4 @@
-const { truncAsMoney, subtractMoney } = require("../../core/money")
+import { subtractMoney, truncAsMoney } from "@/core/money"
 
 describe("Test money parse", ()=>{
     it("parse a third", () => {

@@ -1,24 +1,33 @@
-const { subtractMoney } = require("./money")
-const { calculateMaxInstallment } = require("./wage")
+import { subtractMoney } from "./money"
+import { Bill, MortgageTable } from "./mortgage"
+import { calculateMaxInstallment, SavingsAccount, Wallet } from "./wage"
 
-class Payment {
-    constructor(installmentDate, savingsWithdrawal, cashPayment, bill, balance) {
-        this.installmentDate = installmentDate
-        this.savingsWithdrawal = savingsWithdrawal
-        this.cashPayment = cashPayment
-        this.bill = bill
-        this.balance = balance
-    }
+
+export class Payment {
+    constructor(public installmentDate: Date,
+        public savingsWithdrawal: number,
+        public cashPayment: number,
+        public bill: Bill,
+        public balance: number) { }
 }
 
-const calculatePayments = ({
+interface PaymentCalculusOptions {
+    totalValue: number,
+    savingsAccount: SavingsAccount,
+    mortgageTable: MortgageTable,
+    numberOfMonths: number,
+    contribution: Wallet,
+    initialDate: Date
+}
+
+export const calculatePayments = ({
     totalValue,
     savingsAccount,
     mortgageTable,
     numberOfMonths,
     contribution,
     initialDate
-}) => {
+}: PaymentCalculusOptions) => {
     let balance = totalValue
 
     const report = new Array(numberOfMonths)
@@ -47,7 +56,7 @@ const calculatePayments = ({
     return report.filter(n => n !== undefined)
 }
 
-const validateCompatiblePayment = (balance, grossPay, mortgageTable) => {
+export const validateCompatiblePayment = (balance: number, grossPay: number, mortgageTable: MortgageTable) => {
     const { total: installment } = mortgageTable.calculate(balance)
     const maxInstallment = calculateMaxInstallment(grossPay)
     if (installment > maxInstallment) {
@@ -55,10 +64,4 @@ const validateCompatiblePayment = (balance, grossPay, mortgageTable) => {
             `Parcela supera o valor de ${maxInstallment.toLocaleString('pt-BR')}.`
         )
     }
-}
-
-module.exports = {
-    Payment,
-    calculatePayments,
-    validateCompatiblePayment
 }

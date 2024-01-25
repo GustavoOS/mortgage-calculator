@@ -1,8 +1,4 @@
-const {
-    pmt,
-    annualRateToMonthlyRate,
-    parsePercentage
-} = require("../../core/math");
+import { annualRateToMonthlyRate, parsePercentage, pmt } from "@/core/math";
 
 
 describe("Test the math", () => {

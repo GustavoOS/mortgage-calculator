@@ -1,5 +1,5 @@
-const { truncAsMoney } = require("../../core/money")
-const { calculateMaxInstallment, calculateFGTS, FGTS, Entrepreneur, Wallet } = require("../../core/wage")
+import { truncAsMoney } from "@/core/money"
+import { Entrepreneur, FGTS, Wallet, calculateFGTS, calculateMaxInstallment } from "@/core/wage"
 
 describe("Calculate wage functions", () => {
     it("Calculate max installment from gross pay", () => {

@@ -1,6 +1,5 @@
-const { calculateInstallment, calculateMonthlyInterest,
-    SacTable, PriceTable, Bill } = require("../../core/mortgage")
-const { annualRateToMonthlyRate } = require("../../core/math")
+import { annualRateToMonthlyRate } from "@/core/math"
+import { Bill, PriceTable, SacTable, calculateInstallment, calculateMonthlyInterest } from "@/core/mortgage"
 
 describe("Test mortgage math", () => {
     it("Calculate installment", () => {

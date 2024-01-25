@@ -1,6 +1,6 @@
-const { PaymentDTO } = require("../../service/port/out")
-const { Bill } = require("../../core/mortgage")
-const { Payment } = require("../../core/payment")
+import { Bill } from "@/core/mortgage"
+import { Payment } from "@/core/payment"
+import { PaymentDTO, PaymentReportDTO } from "@/service/port/out"
 
 describe("Test PaymentDTO", () => {
     const payments = [
@@ -26,7 +26,15 @@ describe("Test PaymentDTO", () => {
 })
 
 
-function assertPayment(payment, date, sw, cp, inst, inter, am, ba) {
+function assertPayment(payment: PaymentReportDTO,
+    date: Date,
+    sw: number,
+    cp: number,
+    inst: number,
+    inter: number,
+    am: number,
+    ba: number
+) {
     expect(payment.installmentDate).toEqual(date)
     expect(payment.savingsWithdrawal).toEqual(sw)
     expect(payment.cashPayment).toEqual(cp)

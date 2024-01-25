@@ -1,5 +1,19 @@
-class PaymentDTO {
-    constructor(payments) {
+import { Payment } from "@/core/payment"
+
+export interface PaymentReportDTO {
+    installmentDate: Date
+    savingsWithdrawal: number
+    cashPayment: number
+    installment: number
+    interest: number
+    amortization: number
+    balance: number
+}
+
+export class PaymentDTO {
+    payments: PaymentReportDTO[]
+
+    constructor(payments: Payment[]) {
         this.payments = payments.map((payment) => {
             const {
                 installmentDate,
