@@ -36,4 +36,19 @@ describe("Test service", () => {
         request.grossPay = 1000
         expect(()=>calculateMortgage(request)).toThrow()
     })
+
+    it("Calculate with FGTS", () => {
+        request.hasFGTS = true
+        const mortgage = calculateMortgage(request)
+        expect(mortgage.payments.length).toEqual(5)
+    })
+
+    it("Calculate SAC no interest", () => {
+        request.mortgageType = MortgageType.SAC
+        const mortgage = calculateMortgage(request)
+        expect(mortgage.payments.length).toEqual(10)
+        expect(mortgage.payments.every(
+            payment => payment.installment === 800)).toBeTruthy()
+    })
+
 })
