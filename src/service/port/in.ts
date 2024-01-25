@@ -6,7 +6,7 @@ export enum MortgageType {
 export interface CalculatePaymentRequest {
     grossPay: number
     value: number
-    hasFGTS: string
+    hasFGTS: boolean
     monthlyPayments: number
     annualPayments: number
     mortgageType: MortgageType,

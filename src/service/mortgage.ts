@@ -5,7 +5,7 @@ import { Entrepreneur, FGTS, Wallet } from "@/core/wage"
 import { getFirstDayOfNextMonth } from "@/core/math"
 import { PaymentDTO } from "./port/out"
 
-const mortageCalculatorService = ({
+export const calculateMortgage = ({
     value,
     mortgageType,
     annualInterestRate,
