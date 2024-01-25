@@ -9,5 +9,10 @@ export interface CalculatePaymentRequest {
     hasFGTS: string
     monthlyPayments: number
     annualPayments: number
-    mortgageType: MortgageType
+    mortgageType: MortgageType,
+    annualInterestRate: number,
+    numberOfMonths: number,
+    extraExpenses: number,
+    initialFunds: number,
+    downPayment: number
 }

@@ -25,3 +25,9 @@ export const pmt = (
 export const annualRateToMonthlyRate = (annualRate: number):number => Math.pow(1 + annualRate, 1/12) - 1
 
 export const parsePercentage = (num: number): number => num/100
+
+export const getFirstDayOfNextMonth = (today: Date = new Date()): Date => {
+    today.setMonth(today.getMonth() + 1, 1)
+    today.setHours(0,0,0,0)
+    return today
+}

@@ -1,5 +1,5 @@
 import { PriceTable, SacTable } from "@/core/mortgage"
-import { calculatePayments, validateCompatiblePayment } from "@/core/payment"
+import { calculatePayments, validateCompatiblePayment, calculateDebt } from "@/core/payment"
 import { Entrepreneur, FGTS, Wallet } from "@/core/wage"
 
 describe("Test payment calculations", () => {
@@ -64,12 +64,12 @@ describe("Test payment validation", () => {
 
     it("Invalid gross pay should throw for sac", () => {
         expect(() => validateCompatiblePayment(3000, 100, sac)).toThrow(
-            "Parcela supera o valor de 30.")
+            "Parcela supera o valor de R$ 30,00.")
     })
 
     it("Invalid gross pay should throw for price", () => {
         expect(() => validateCompatiblePayment(300, 10, price)).toThrow(
-            "Parcela supera o valor de 3."
+            "Parcela supera o valor de R$ 3,00."
         )
     })
 
@@ -79,5 +79,18 @@ describe("Test payment validation", () => {
 
     it("Valid gross pay should not throw for price", () => {
         expect(() => validateCompatiblePayment(300, 1000000, price))
+    })
+
+    it("Down payment too low should throw on validation", () => {
+        expect(()=>calculateDebt(500, 1)).toThrow("Entrada menor que a mínima, que é de R$ 100,00.")
+    })
+
+    it("Decimal numbers should have a pt-BR notation", () => {
+        expect(()=>calculateDebt(37.5, 1)).toThrow("Entrada menor que a mínima, que é de R$ 7,50.")
+    })
+
+    it("Valid down payment should result in a subtraction", () => {
+        const result = calculateDebt(90.32, 45)
+        expect(result).toEqual(45.32)
     })
 })

@@ -1,4 +1,4 @@
-import { subtractMoney } from "./money"
+import { formatMoneyString, subtractMoney, truncAsMoney } from "./money"
 import { Bill, MortgageTable } from "./mortgage"
 import { calculateMaxInstallment, SavingsAccount, Wallet } from "./wage"
 
@@ -61,7 +61,15 @@ export const validateCompatiblePayment = (balance: number, grossPay: number, mor
     const maxInstallment = calculateMaxInstallment(grossPay)
     if (installment > maxInstallment) {
         throw new Error(
-            `Parcela supera o valor de ${maxInstallment.toLocaleString('pt-BR')}.`
+            `Parcela supera o valor de ${formatMoneyString(maxInstallment)}.`
         )
     }
+}
+
+export const calculateDebt = (total: number, downPayment: number): number => {
+    const minimalPayment = truncAsMoney(total/5)
+    if (downPayment < minimalPayment) {
+        throw new Error(`Entrada menor que a mínima, que é de ${formatMoneyString(minimalPayment)}.`)
+    }
+    return subtractMoney(total, downPayment)
 }

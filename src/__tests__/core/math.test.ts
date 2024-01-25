@@ -1,4 +1,4 @@
-import { annualRateToMonthlyRate, parsePercentage, pmt } from "@/core/math";
+import { annualRateToMonthlyRate, getFirstDayOfNextMonth, parsePercentage, pmt } from "@/core/math";
 
 
 describe("Test the math", () => {
@@ -19,5 +19,17 @@ describe("Test the math", () => {
     it("Test percentage", () => {
         const result = parsePercentage(9.99)
         expect(result).toEqual(0.0999)
+    })
+    it("Get first day of next month from given day", () => {
+        const day = new Date('2024-01-25T11:35:43.189')
+        const result = getFirstDayOfNextMonth(day)
+        const expected = new Date("2024-02-01T00:00:00")
+        expect(result).toEqual(expected)
+    })
+
+    it("Get first day of next month should give a date if not given", () => {
+        const day = getFirstDayOfNextMonth()
+        expect(day).not.toBeNull()
+        expect(day).toBeInstanceOf(Date)
     })
 })
