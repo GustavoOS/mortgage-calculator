@@ -10,8 +10,8 @@ const asMoney = (a: number) => BrazilianReal.format(a)
 
 export const MortgageReport: React.FC<MortgageReportI> = ({ report }) => {
     const payments = report?.payments
-    const rows = payments?.map(payment => (
-        <tr>
+    const rows = payments?.map((payment, index) => (
+        <tr key={index}>
             <td>{payment.installmentDate.toLocaleDateString('pt-BR')}</td>
             <td>{asMoney(payment.savingsWithdrawal)}</td>
             <td>{asMoney(payment.cashPayment)}</td>
