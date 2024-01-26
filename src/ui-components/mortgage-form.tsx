@@ -1,10 +1,26 @@
 import { CalculatePaymentRequest, MortgageType } from "@/service/port/in"
-import { ChangeEvent, SetStateAction, useState } from "react"
+import { ChangeEvent, useState } from "react"
 
 type ParamsChanger = (param: CalculatePaymentRequest) => void;
 
 interface MortgageFormProps {
   submitMortgageParams: ParamsChanger;
+}
+
+class Request implements CalculatePaymentRequest {
+  constructor(
+    readonly grossPay: number,
+    readonly hasFGTS: boolean,
+    readonly extraExpenses: number,
+    readonly mortgageType: MortgageType,
+    readonly annualPayments: number,
+    readonly monthlyPayments: number,
+    readonly value: number,
+    readonly annualInterestRate: number,
+    readonly numberOfMonths: number,
+    readonly initialFunds: number,
+    readonly downPayment: number
+  ) { }
 }
 
 export const MortgageForm: React.FC<MortgageFormProps> = ({ submitMortgageParams }) => {
@@ -40,13 +56,20 @@ export const MortgageForm: React.FC<MortgageFormProps> = ({ submitMortgageParams
 
   const submitMortgage = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    submitMortgageParams({
-      ...formData,
-      value: formData.assetValue,
-      annualInterestRate: formData.interest,
-      extraExpenses: formData.insurance + formData.admFee
-    })
+    submitMortgageParams(new Request(
+      formData.grossPay,
+      formData.hasFGTS,
+      formData.insurance + formData.admFee,
+      formData.mortgageType,
+      formData.annualPayments,
+      formData.monthlyPayments,
+      formData.assetValue,
+      formData.interest,
+      formData.numberOfMonths,
+      formData.initialFunds,
+      formData.downPayment))
   }
+
 
   return (
     <>

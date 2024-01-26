@@ -45,8 +45,3 @@ export class PaymentDTO {
         }
     }
 }
-
-
-module.exports = {
-    PaymentDTO
-}

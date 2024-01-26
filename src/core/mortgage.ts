@@ -36,7 +36,7 @@ export class PriceTable implements MortgageTable {
     constructor(totalValue: number, annualInterestRate:number, numberOfMonths: number, extraExpenses: number){
         this.interestRate = annualRateToMonthlyRate(annualInterestRate)
         this.installment = calculateInstallment(totalValue, this.interestRate, numberOfMonths)
-        this.extraExpenses = extraExpenses
+        this.extraExpenses = truncAsMoney(extraExpenses)
     }
 
     calculate(balance: number) {
@@ -60,7 +60,7 @@ export class SacTable implements MortgageTable{
     constructor(totalValue: number, annualInterestRate:number, numberOfMonths: number, extraExpenses: number) {
         this.interestRate = annualRateToMonthlyRate(annualInterestRate)
         this.monthlyAmortization = truncAsMoney(totalValue/numberOfMonths)
-        this.extraExpenses = extraExpenses
+        this.extraExpenses = truncAsMoney(extraExpenses)
     }
 
     calculate(balance: number) {
