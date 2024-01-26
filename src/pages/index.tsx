@@ -1,14 +1,11 @@
 import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "next/font/google";
-import styles from "@/ui-components/styles/Home.module.css";
-import { MortgageForm } from "@/ui-components/mortgage-form";
+import { MortgageCalculator } from "@/ui-components/mortgage-calculator";
 
 
 const inter = Inter({ subsets: ["latin"] });
-const headerColor = {
-  color: "#D8546D"
-}
+
+
 
 export default function Home() {
   return (
@@ -21,8 +18,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`container ${inter.className}`}>
-        <h1 style={headerColor}>Calculadora de Amortização</h1>
-        <MortgageForm />
+        <MortgageCalculator />
       </main>
     </>
   );
