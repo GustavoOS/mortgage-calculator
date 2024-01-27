@@ -39,6 +39,7 @@ export const MortgageCalculator = () => {
             setMortgageReport(calculateMortgage(request))
         } catch (error) {
             alert(error)
+            setMortgageReport(null)
         }
     }, [mortgageParams])
 
