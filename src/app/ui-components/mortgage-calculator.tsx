@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { MortgageForm } from "./mortgage-form";
-import { CalculatePaymentRequest, MortgageType } from "@/service/port/in";
+import { CalculatePaymentRequest } from "@/service/port/in";
 import { MortgageReport } from "./mortgage-report";
 import { calculateMortgage } from "@/service/mortgage";
 import { PaymentDTO } from "@/service/port/out";
