@@ -39,7 +39,7 @@ export const MortgageReport: React.FC<MortgageReportI> = ({ report }) => {
                     <tr>
                         <th scope="col">Data</th>
                         <th scope="col">Saque FGTS</th>
-                        <th scope="col">Pagamento em dinheiro</th>
+                        <th scope="col">Pagamento adicional</th>
                         <th scope="col">Prestação</th>
                         <th scope="col">Juros</th>
                         <th scope="col">Amortização</th>
