@@ -20,5 +20,12 @@ export default defineConfig({
       ['**\/*.edge.test.ts', 'edge-runtime'],
       // ...
     ]
+  },
+  build: {
+    rollupOptions: {
+      external: [
+        '@/__tests__/**/**'
+      ]
+    }
   }
 })
