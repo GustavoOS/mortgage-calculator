@@ -38,7 +38,7 @@ export const MortgageCalculator = () => {
             console.debug(request)
             setMortgageReport(calculateMortgage(request))
         } catch (error) {
-            console.error(error)
+            alert(error)
         }
     }, [mortgageParams])
 

@@ -61,13 +61,14 @@ export const validateCompatiblePayment = (balance: number, grossPay: number, mor
     const maxInstallment = calculateMaxInstallment(grossPay)
     if (installment > maxInstallment) {
         throw new Error(
-            `Parcela supera o valor de ${formatMoneyString(maxInstallment)}.`
+            `Parcela supera o valor de ${formatMoneyString(maxInstallment)}. ` +
+            "Tente aumentar o prazo, o valor de entrada ou renda bruta."
         )
     }
 }
 
 export const calculateDebt = (total: number, downPayment: number): number => {
-    const minimalPayment = truncAsMoney(total/5)
+    const minimalPayment = truncAsMoney(total / 5)
     if (downPayment < minimalPayment) {
         throw new Error(`Entrada menor que a mínima, que é de ${formatMoneyString(minimalPayment)}.`)
     }
