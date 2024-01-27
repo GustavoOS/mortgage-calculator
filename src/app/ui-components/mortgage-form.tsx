@@ -145,9 +145,9 @@ export const MortgageForm: React.FC<MortgageFormProps> = ({ submitMortgageParams
           <legend>Sobre o financiamento</legend>
           <div className="row">
             <div className="col">
-              <label htmlFor="mortgageTable" className="form-label">Selecione o sistema de amortização</label>
+              <label htmlFor="mortgageType" className="form-label">Selecione o sistema de amortização</label>
               <select className="form-select" aria-label="Selecione o sitema de amortização"
-                id="mortgageTable" value={formData.mortgageType} onChange={handleChange} name="mortgageTable">
+                id="mortgageType" value={formData.mortgageType} onChange={handleChange} name="mortgageType">
                 <option value={MortgageType.PRICE}>PRICE - Parcela fixa</option>
                 <option value={MortgageType.SAC}>SAC - Parcela diminui ao longo do tempo</option>
               </select>
