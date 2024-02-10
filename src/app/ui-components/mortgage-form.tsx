@@ -77,7 +77,7 @@ export const MortgageForm: React.FC<MortgageFormProps> = ({ submitMortgageParams
         <fieldset>
           <legend>Sobre o bem</legend>
           <div className="row">
-            <div className="col">
+            <div className="col-md">
               <label htmlFor="assetValue" className="form-label">Valor do bem</label>
               <input type="number" className="form-control" id="assetValue" min="0" step="0.01"
                 onChange={handleChange}
@@ -86,7 +86,7 @@ export const MortgageForm: React.FC<MortgageFormProps> = ({ submitMortgageParams
                 required
               />
             </div>
-            <div className="col">
+            <div className="col-md">
               <label htmlFor="downPayment" className="form-label">Valor de entrada</label>
               <input type="number" min={formData.minDownPayment} step="0.01" className="form-control"
                 id="downPayment" aria-describedby="minDownPayment" name="downPayment" onChange={handleChange}
@@ -102,7 +102,7 @@ export const MortgageForm: React.FC<MortgageFormProps> = ({ submitMortgageParams
         <fieldset>
           <legend>Sobre quem está financiando</legend>
           <div className="row">
-            <div className="col">
+            <div className="col-md">
               <label htmlFor="grossPay" className="form-label">Renda Bruta</label>
               <input type="number" className="form-control" id="grossPay" min="0" step="0.01"
                 aria-describedby="maxInstallment" name="grossPay" onChange={handleChange}
@@ -112,13 +112,13 @@ export const MortgageForm: React.FC<MortgageFormProps> = ({ submitMortgageParams
                 Parcela não pode comprometer mais que 30% da renda bruta.
               </div>
             </div>
-            <div className="col">
+            <div className="col-md">
               <fieldset>
                 <div className="row">
                   <div className="col-md-2">
                     <legend>FGTS</legend>
                   </div>
-                  <div className="col">
+                  <div className="col-md">
                     <div className="form-check">
                       <input className="form-check-input" type="checkbox" id="hasFGTS"
                         onChange={handleChange} checked={formData.hasFGTS} name="hasFGTS" />
@@ -129,7 +129,7 @@ export const MortgageForm: React.FC<MortgageFormProps> = ({ submitMortgageParams
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col offset-md-2">
+                  <div className="col-md offset-md-2">
                     <label htmlFor="fgtsFunds" className="form-label">Saldo FGTS atual</label>
                     <input type="number" className="form-control" id="fgtsFunds" min="0" step="0.01"
                       disabled={!formData.hasFGTS} onChange={handleChange} name="initialFunds"
@@ -144,7 +144,7 @@ export const MortgageForm: React.FC<MortgageFormProps> = ({ submitMortgageParams
         <fieldset>
           <legend>Sobre o financiamento</legend>
           <div className="row">
-            <div className="col">
+            <div className="col-md">
               <label htmlFor="mortgageType" className="form-label">Selecione o sistema de amortização</label>
               <select className="form-select" aria-label="Selecione o sitema de amortização"
                 id="mortgageType" value={formData.mortgageType} onChange={handleChange} name="mortgageType">
@@ -152,7 +152,7 @@ export const MortgageForm: React.FC<MortgageFormProps> = ({ submitMortgageParams
                 <option value={MortgageType.SAC}>SAC - Parcela diminui ao longo do tempo</option>
               </select>
             </div>
-            <div className="col">
+            <div className="col-md">
               <label htmlFor="interest" className="form-label">Juros nominais (%)</label>
               <input type="number" className="form-control" id="interest" min="0" step="any" name="interest"
                 value={formData.interest} onChange={handleChange} required />
@@ -160,14 +160,14 @@ export const MortgageForm: React.FC<MortgageFormProps> = ({ submitMortgageParams
           </div>
           <br />
           <div className="row">
-            <div className="col">
+            <div className="col-md">
               <label htmlFor="numberOfMonths" className="form-label">Prazo (em meses)</label>
               <input type="number" className="form-control" id="numberOfMonths" min="0" step="1"
                 name="numberOfMonths" value={formData.numberOfMonths} onChange={handleChange}
                 max="420" required
               />
             </div>
-            <div className="col">
+            <div className="col-md">
               <label htmlFor="insurance" className="form-label">Seguro</label>
               <input type="number" className="form-control" id="insurance" min="0" step="0.01"
                 value={formData.insurance}
@@ -176,7 +176,7 @@ export const MortgageForm: React.FC<MortgageFormProps> = ({ submitMortgageParams
                 required
               />
             </div>
-            <div className="col">
+            <div className="col-md">
               <label htmlFor="insurance" className="form-label">Taxa de Admnistração</label>
               <input type="number" className="form-control" id="insurance" min="0" step="0.01"
                 value={formData.admFee}
@@ -191,14 +191,14 @@ export const MortgageForm: React.FC<MortgageFormProps> = ({ submitMortgageParams
         <fieldset>
           <legend>Sobre o pagamento</legend>
           <div className="row">
-            <div className="col">
+            <div className="col-md">
               <label htmlFor="monthlyAmortization" className="form-label">Pagamento adicional mensal</label>
               <input type="number" className="form-control" id="monthlyAmortization" min="0" step="0.01"
                 value={formData.monthlyPayments} onChange={handleChange} name="monthlyPayments"
                 required
               />
             </div>
-            <div className="col">
+            <div className="col-md">
               <label htmlFor="annualAmortization" className="form-label">Pagamento adicional anual</label>
               <input type="number" className="form-control" id="annualAmortization" min="0" step="0.01"
                 value={formData.annualPayments} name="annualPayments" onChange={handleChange}

@@ -34,7 +34,8 @@ export const MortgageReport: React.FC<MortgageReportI> = ({ report }) => {
     return (
         <>
             {completionTime}
-            <table className="table table-striped table-bordered">
+            <div className="table-responsive">
+            <table className="table table-striped table-bordered ">
                 <thead className="text-center">
                     <tr>
                         <th scope="col">Data</th>
@@ -50,6 +51,7 @@ export const MortgageReport: React.FC<MortgageReportI> = ({ report }) => {
                     {rows}
                 </tbody>
             </table>
+            </div>
         </>
     )
 }
