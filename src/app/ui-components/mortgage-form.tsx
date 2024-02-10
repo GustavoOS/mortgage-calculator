@@ -119,7 +119,7 @@ export const MortgageForm: React.FC<MortgageFormProps> = ({ submitMortgageParams
                     <legend>FGTS</legend>
                   </div>
                   <div className="col-md">
-                    <div className="form-check">
+                    <div className="form-check form-switch">
                       <input className="form-check-input" type="checkbox" id="hasFGTS"
                         onChange={handleChange} checked={formData.hasFGTS} name="hasFGTS" />
                       <label className="form-check-label" htmlFor="hasFGTS">
